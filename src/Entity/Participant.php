@@ -25,16 +25,12 @@ class Participant implements UserInterface
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private $motPasse;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,7 +53,7 @@ class Participant implements UserInterface
     private $administrateur;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", options={"default"=true})
      */
     private $actif;
 
@@ -84,6 +80,8 @@ class Participant implements UserInterface
 
     public function __construct()
     {
+        $this->actif=true;
+        $this->administrateur=false;
         $this->sortiesOrganisees = new ArrayCollection();
         $this->sorties = new ArrayCollection();
     }
@@ -123,34 +121,34 @@ class Participant implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+       return $this->administrateur? ['ROLE_ADMIN']:['ROLE_USER'];
     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
 
     /**
      * @see UserInterface
      */
     public function getPassword(): string
     {
-        return $this->password;
+        return $this->motPasse;
     }
 
-    public function setPassword(string $password): self
+    /**
+     * @return string
+     */
+    public function getMotPasse(): string
     {
-        $this->password = $password;
-
-        return $this;
+        return $this->motPasse;
     }
+
+    /**
+     * @param string $motPasse
+     */
+    public function setMotPasse(string $motPasse): void
+    {
+        $this->motPasse = $motPasse;
+    }
+
 
     /**
      * Returning a salt is only needed, if you are not using a modern

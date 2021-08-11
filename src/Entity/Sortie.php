@@ -30,7 +30,7 @@ class Sortie
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="time")
+     * @ORM\Column(type="integer")
      */
     private $duree;
 
@@ -74,6 +74,7 @@ class Sortie
 
     /**
      * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
 
