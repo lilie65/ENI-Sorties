@@ -34,6 +34,7 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         $user->setPassword($newHashedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
+
     }
 
     // /**
