@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,13 +18,7 @@ class MainController extends AbstractController
     }
 
 
-    /**
-     * @Route ("/sorties/nouvelle", name="main_form")
-     */
-    public function form()
-    {
-        return $this->render('main/form.html.twing');
-    }
+
 
 
 }
