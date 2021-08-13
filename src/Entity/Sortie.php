@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use App\Entity\Participant;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -68,6 +70,7 @@ class Sortie
     private $organisateur;
 
     /**
+     * @var Participant[]
      * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties")
      */
     private $participants;
@@ -78,13 +81,12 @@ class Sortie
      */
     private $campus;
 
+
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
     }
-
-
-
 
 
     public function getId(): ?int

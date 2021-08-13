@@ -1,22 +1,39 @@
 <div class="flexDirection">
 <div class="flexbox1">
-<img class="img" src="{{ asset('img/1120x490_Campagne.jpg') }}">
+<img class="img" src="{{ asset('img/22701432-route-dans-la-for-t-profonde.jpg') }}">
     <h1>Sortir.com</h1>
 </div>
 <div class="flexbox2">
 <ul class="nav justify-content-end ">
+    {% if app.user %}
     <li class="nav-item">
-        <a class="nav-link active couleur" aria-current="page" href="{{ path('app_login') }}"title="login">Connectez-Vous</a>
+        <a class="nav-link" aria-current="page" href="#"title="login">Ville</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Campus</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#">Mon profil</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{path('app_logout') }}">se déconnecter</a>
+        </li>
+    {% endif %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li class="nav-item">
+            <a class="nav-link active couleur" aria-current="page" href="{{ path('app_login') }}"title="login">Connectez-Vous</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+    {% endif %}
+
 </ul>
 </div>
 </div>
