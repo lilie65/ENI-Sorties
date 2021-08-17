@@ -10,11 +10,11 @@ class MainController extends AbstractController
 {
 
     /**
-     * @Route ("/home", name="main_home")
+     * @Route ("/list", name="main_home")
      */
     public function home()
     {
-        return $this->render('main/home.html.twig');
+        return $this->render('main/listSo.html.twig');
     }
 
 
