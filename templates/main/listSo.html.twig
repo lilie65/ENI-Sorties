@@ -5,45 +5,52 @@
 {% endblock %}
 
 {% block body %}
-    <section>
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Date de la sortie</th>
-                <th>Clôture</th>
-                <th>inscrits/places</th>
-                <th>Etat</th>
-                <th>Inscrit</th>
-                <th>organisateur</th>
-                <th>Action</th>
+    <div class="margin">
+        <select name="selectCampus" id="selectCampus">
+        {% for campus in listCampus %}
+            <option value="select">{{ campus.nom }}</option>
+        {% endfor %}
+        </select>
+        <input type="hidden" name="Submit"
+               value="{{  }}"
+        >
 
-            </tr>
-            {% for sortie in sorties %}
+        <section>
+            <table>
                 <tr>
-                    <td>{{ sortie.nom }}</td>
-                    <td>{{ sortie.dateHeureDebut|date("d/m/y") }}</td>
-                    <td>{{ sortie.dateLimiteinscription|date("d/m/y") }}</td>
-                    <td>{{ sortie.participants.count }} / {{ sortie.nbInscriptionsMax }} </td>
-                    <td>{{ sortie.etat.libelle }}</td>
-                    <td>{{ app.user in sortie.participants ?"x":"" }}</td>
-                    <td>{{ sortie.organisateur.nom }}</td>
-                    <td>
-                        <a href="#" title="Afficher">Afficher</a>
-                        {% if app.user %}
-                            {% if app.user in sortie.participants %}
-                                - <a href="#" title="desinscription">se désister</a><br>
-                            {% endif %}
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            - <a href="#" title="modifier">Modifier</a>
-                            - <a href=" {{ sortie.etat.libelle }}">publier</a>
-                        {% endif %}
-                    </td>
+                    <th>Nom</th>
+                    <th>Date de la sortie</th>
+                    <th>Clôture</th>
+                    <th>inscrits/places</th>
+                    <th>Etat</th>
+                    <th>Inscrit</th>
+                    <th>organisateur</th>
+                    <th>Action</th>
+
                 </tr>
-            {% endfor %}
+                {% for sortie in sorties %}
+                    <tr>
+                        <td>{{ sortie.nom }}</td>
+                        <td>{{ sortie.dateHeureDebut|date("d/m/y") }}</td>
+                        <td>{{ sortie.dateLimiteinscription|date("d/m/y") }}</td>
+                        <td>{{ sortie.participants.count }} / {{ sortie.nbInscriptionsMax }} </td>
+                        <td>{{ sortie.etat.libelle }}</td>
+                        <td>{{ app.user in sortie.participants ?"x":"" }}</td>
+                        <td>{{ sortie.organisateur.nom }}</td>
+                        <td>
+                            <a href="#" title="Afficher">Afficher</a>
+                            {% if app.user in sortie.participants %}
 
-        </table>
-    </section>
-
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                - <a href="#" title="modifier">Modifier</a>
+                                - <a href=" ">publier</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </section>
+    </div>
 {% endblock %}
 
