@@ -2,9 +2,18 @@
 
 {% block body %}
 
-    <div>
-        {{ form(sortieForm) }}
-    </div>
+
+        {{ form_start(sortieForm) }}
+
+        {{ form_widget(sortieForm) }}
+
+
+
+        <button class="btn btn-lg btn-primary">Valider</button>
+
+        {{ form_end(sortieForm) }}
+
+
 
 {% endblock %}
 

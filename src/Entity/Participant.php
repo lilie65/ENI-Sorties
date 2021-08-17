@@ -86,7 +86,6 @@ class Participant implements UserInterface
         $this->administrateur=false;
         $this->sortiesOrganisees = new ArrayCollection();
         $this->sorties = new ArrayCollection();
-
     }
 
 
