@@ -60,7 +60,7 @@ class Participant implements UserInterface
     private $actif;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $pseudo;
 
