@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enregistrement{% endblock %}
+
+{% block body %}
+    <div class="margin formulaire">
+
+        {{ form_start(participantForm) }}
+        <h1 class="h3 mb-3 font-weight-normal">Enregistrement</h1>
+
+        {{ form_widget(participantForm) }}
+
+        <button type="submit" class="btn btn-lg btn-primary">Mettre à jour</button>
+        {{ form_end(participantForm) }}
+    </div>
+{% endblock %}
