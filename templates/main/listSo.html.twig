@@ -6,15 +6,17 @@
 
 {% block body %}
     <div class="margin">
-        <select name="selectCampus" id="selectCampus">
-        {% for campus in listCampus %}
-            <option value="select">{{ campus.nom }}</option>
-        {% endfor %}
-        </select>
-        <input type="hidden" name="Submit"
-               value="{{  }}"
-        >
+        {{ form_start(searchForm) }}
 
+        {{ form_widget(searchForm) }}
+
+
+        <button class="btn btn-lg btn-primary">Valider</button>
+
+        {{ form_end(searchForm) }}
+    </div>
+
+    <div class="margin">
         <section>
             <table>
                 <tr>
@@ -40,10 +42,11 @@
                         <td>
                             <a href="#" title="Afficher">Afficher</a>
                             {% if app.user in sortie.participants %}
+                                <a href="{{ path('delete',{ 'id':app.user.id}) }}" title="supprimer">supprimer</a>
 
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
-                                - <a href="#" title="modifier">Modifier</a>
+
                                 - <a href=" ">publier</a>
                             {% endif %}
                         </td>
