@@ -2,19 +2,17 @@
 
 {% block body %}
 
+        <div class="margin formulaire">
 
-        {{ form_start(sortieForm) }}
+                {{ form_start(sortieForm) }}
+                <h1 class="h3 mb-3 font-weight-normal">Nouvelle Sortie</h1>
 
-        {{ form_widget(sortieForm) }}
+                {{ form_widget(sortieForm) }}
 
+                <button class="btn btn-lg btn-primary" type="submit">Valider</button>
 
-
-        <button class="btn btn-lg btn-primary">Valider</button>
-
-        {{ form_end(sortieForm) }}
-
-
-
+                {{ form_end(sortieForm) }}
+        </div>
 {% endblock %}
 
 {% block title %}

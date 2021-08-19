@@ -1,4 +1,4 @@
-/*formulaire login*/
+/*formulaire*/
 .formulaire {
     border: 2px grey solid;
     box-shadow: 10px 5px 5px darkgrey;
@@ -6,16 +6,28 @@
     width: 400px;
     margin: auto;
     padding: 20px;
-
 }
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+}
+
+form > div > div {
+    margin-bottom: 1rem;
+}
+
 .margin{
     margin-top: 70px;
     margin-bottom: 70px;
-}
-
-.form-control {
-    width: 350px;
-
 }
 
 /*Nav*/
