@@ -42,8 +42,9 @@
                         <td>
                             <a href="#" title="Afficher">Afficher</a>
                             {% if app.user in sortie.participants %}
-                                <a href="{{ path('delete',{ 'id':app.user.id}) }}" title="supprimer">supprimer</a>
-
+                                <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">supprimer</a>
+                                {% else%}
+                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">ajouter</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
 
@@ -53,7 +54,12 @@
                     </tr>
                 {% endfor %}
             </table>
+
         </section>
+        <button class="btn btn-lg btn-primary">
+            <a href="{{ path('app_register') }}" title="Créer une sorti" >Créer une sortie</a>
+        </button>
+
     </div>
 {% endblock %}
 
