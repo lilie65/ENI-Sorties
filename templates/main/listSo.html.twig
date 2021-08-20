@@ -5,11 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="margin">
+    <div class="margin formulaire">
         {{ form_start(searchForm) }}
 
         {{ form_widget(searchForm) }}
-
 
         <button class="btn btn-lg btn-primary">Valider</button>
 
@@ -43,25 +42,29 @@
                             <a href="#" title="Afficher">Afficher</a>
                             {% if app.user in sortie.participants %}
                                 <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">Se désister</a>
-                                {% else%}
-                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">Pariciper</a>
+
+                            {% elseif sortie.dateLimiteinscription|date > "now"|date   %}
+                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">S'inscrire</a>
                             {% endif %}
+
                             {% if app.user.pseudo==sortie.organisateur.pseudo %}
                                 <a href="{{ path('sortie_annuler',{'id':sortie.id}) }}" title="annuler">Annuler</a>
                             {% endif %}
-                            {% if is_granted('ROLE_ADMIN') %}
+                            {# {% if is_granted('ROLE_ADMIN') %}
 
                                 - <a href=" ">publier</a>
-                            {% endif %}
+                            {% endif %}  #}
                         </td>
                     </tr>
                 {% endfor %}
             </table>
 
         </section>
-        <button class="btn btn-lg btn-primary">
-            <a href="{{ path('app_register') }}" title="Créer une sortie" >Créer une sortie</a>
-        </button>
+
+            <a href="{{ path('sortie_nouvelle') }}" title="Créer une sortie" >
+                <button class="btn btn-lg btn-primary">Créer une sortie</button>
+            </a>
+
 
     </div>
 {% endblock %}
