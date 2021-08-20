@@ -8,6 +8,7 @@ use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,5 +82,20 @@ class SortieController extends AbstractController
         return $this->render('sortie/nouvelle.html.twig', [
             'sortieForm'=> $sortieForm->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/sortie/annuler/{id}", name="sortie_annuler")
+     */
+    public function annuler(int $id, EntityManagerInterface $entityManager,
+                            SortieRepository $sortieRepository, EtatRepository $etatRepository)
+    {
+        $sortieSelectionner= $sortieRepository->findOneBy(['id'=>$id]);
+        $etatAnnulé=$etatRepository->findOneBy(['libelle'=>'Annulée']);
+
+        $sortieSelectionner->setEtat($etatAnnulé);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('list');
     }
 }

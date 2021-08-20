@@ -42,9 +42,12 @@
                         <td>
                             <a href="#" title="Afficher">Afficher</a>
                             {% if app.user in sortie.participants %}
-                                <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">supprimer</a>
+                                <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">Se désister</a>
                                 {% else%}
-                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">ajouter</a>
+                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">Pariciper</a>
+                            {% endif %}
+                            {% if app.user.pseudo==sortie.organisateur.pseudo %}
+                                <a href="{{ path('sortie_annuler',{'id':sortie.id}) }}" title="annuler">Annuler</a>
                             {% endif %}
                             {% if is_granted('ROLE_ADMIN') %}
 
@@ -57,7 +60,7 @@
 
         </section>
         <button class="btn btn-lg btn-primary">
-            <a href="{{ path('app_register') }}" title="Créer une sorti" >Créer une sortie</a>
+            <a href="{{ path('app_register') }}" title="Créer une sortie" >Créer une sortie</a>
         </button>
 
     </div>

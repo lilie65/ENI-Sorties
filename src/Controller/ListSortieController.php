@@ -58,7 +58,7 @@ class ListSortieController extends AbstractController
     /**
      * @Route("/ajout/{id}", name="ajout")
      */
-    public function ajout ($id)
+    public function ajout($id)
     {
         $sortieSelectionner= $this->getDoctrine()->getRepository('App:Sortie')->find($id);
 
@@ -70,7 +70,4 @@ class ListSortieController extends AbstractController
 
         return $this->redirectToRoute('list');
     }
-
-
-
 }
