@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section class="margin formulaire">
+        <div>
+            <h2>{{ participant.pseudo }}</h2>
+            <ul class="">
+                <li>Prénom: {{ participant.prenom }}</li>
+                <li>Nom: {{ participant.nom }}</li>
+                <li>Téléphone: {{ participant.telephone }}</li>
+                <li>Email: {{ participant.email }}</li>
+                <li>Campus: {{ participant.campus.nom }}</li>
+            </ul>
+        </div>
+        <a href="{{ path('list') }}"><button class="btn btn-lg btn-primary">Retour</button></a>
+    </section>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

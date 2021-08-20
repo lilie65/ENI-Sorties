@@ -233,6 +233,7 @@ class Participant implements UserInterface
         return $this;
     }
 
+
     public function getPseudo(): ?string
     {
         return $this->pseudo;

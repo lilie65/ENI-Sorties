@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Campus;
 use App\Entity\Participant;
+use App\Entity\Ville;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -10,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IdenticalTo;
 
-class ParticipantType extends AbstractType
+class UpdateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,6 +31,11 @@ class ParticipantType extends AbstractType
             ->add('prenom')
             ->add('telephone')
             ->add('pseudo')
+            ->add('campus', EntityType::class, [
+                'label'=>'Campus',
+                'class' => Campus::class,
+                'choice_label' => 'nom',
+            ])
         ;
     }
 

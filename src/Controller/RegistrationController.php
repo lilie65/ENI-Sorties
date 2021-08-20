@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
-use App\Form\ParticipantType;
 use App\Form\RegistrationFormType;
+use App\Form\UpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,20 +50,20 @@ class RegistrationController extends AbstractController
     {
         $user= $this->getUser();
 
-        $participantForm = $this->createForm(ParticipantType::class, $user);
-        $participantForm->handleRequest($request);
+        $updateForm = $this->createForm(UpdateType::class, $user);
+        $updateForm->handleRequest($request);
 
-        if ($participantForm->isSubmitted() && $participantForm->isValid()) {
+        if ($updateForm->isSubmitted() && $updateForm->isValid()) {
 
 
             // encode the plain password if nouveauMP is not empty & conf=nouveauMP
-            $nouveauMotPasse=$participantForm->get('nouveauMotPasse')->getData();
+            $nouveauMotPasse=$updateForm->get('nouveauMotPasse')->getData();
             if (!empty($nouveauMotPasse)) {
 
                 $user->setMotPasse(
                     $passwordEncoder->encodePassword(
                         $user,
-                        $participantForm->get('nouveauMotPasse')->getData()
+                        $updateForm->get('nouveauMotPasse')->getData()
                     )
                 );
             }
@@ -74,8 +74,8 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('update');
         }
 
-        return $this->render('participant/participant.html.twig', [
-            'participantForm' => $participantForm->createView(),
+        return $this->render('profil/update.html.twig', [
+            'participantForm' => $updateForm->createView(),
         ]);
     }
 
