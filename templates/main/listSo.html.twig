@@ -53,7 +53,7 @@
                                 <a href="{{ path('profil',{'pseudo':sortie.organisateur.pseudo}) }}">{{ sortie.organisateur.pseudo }}</a>
                             </td>
                             <td>
-                                <a href="" title="Afficher">Afficher</a>
+                                <a href="#" title="Afficher">Afficher</a>
                                 {% if app.user %}
                                     {% if app.user in sortie.participants %}
                                         <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">Se
