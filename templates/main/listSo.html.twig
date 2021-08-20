@@ -5,13 +5,23 @@
 {% endblock %}
 
 {% block body %}
-    <div class="margin formulaire">
+    <div class="margin ">
         {{ form_start(searchForm) }}
-
-        {{ form_widget(searchForm) }}
-
-        <button class="btn btn-lg btn-primary">Valider</button>
-
+        <div class="flexFormFiltre">
+            <div class="flexDirectionFiltreFiltre">
+                {{ form_row(searchForm.nom) }}
+                {{ form_row(searchForm.campus) }}
+                {{ form_row(searchForm.dateDebut) }}
+                {{ form_row(searchForm.dateFin) }}
+            </div>
+            <div class="flexDirectionFiltre">
+                {{ form_row(searchForm.sortieInscrit) }}
+                {{ form_row(searchForm.sortieNonInscrit) }}
+                {{ form_row(searchForm.sortieOrganisateur) }}
+                {{ form_row(searchForm.sortiePassee) }}
+                <button class="btn btn-lg btn-primary">Valider</button>
+            </div>
+        </div>
         {{ form_end(searchForm) }}
     </div>
 
@@ -29,41 +39,54 @@
                     <th>Action</th>
 
                 </tr>
-                {% for sortie in sorties %}
-                    <tr>
-                        <td>{{ sortie.nom }}</td>
-                        <td>{{ sortie.dateHeureDebut|date("d/m/y") }}</td>
-                        <td>{{ sortie.dateLimiteinscription|date("d/m/y") }}</td>
-                        <td>{{ sortie.participants.count }} / {{ sortie.nbInscriptionsMax }} </td>
-                        <td>{{ sortie.etat.libelle }}</td>
-                        <td>{{ app.user in sortie.participants ?"x":"" }}</td>
-                        <td><a href="{{ path('profil',{'pseudo':sortie.organisateur.pseudo}) }}">{{ sortie.organisateur.pseudo }}</a></td>
-                        <td>
-                            <a href="#" title="Afficher">Afficher</a>
-                            {% if app.user in sortie.participants %}
-                                <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">Se désister</a>
 
-                            {% elseif sortie.dateLimiteinscription|date > "now"|date   %}
-                                    <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">S'inscrire</a>
-                            {% endif %}
+                    {% for sortie in sorties %}
+                        {% if sortie.estNonArchivable%}
+                        <tr>
+                            <td>{{ sortie.nom }}</td>
+                            <td>{{ sortie.dateHeureDebut|date("d/m/y") }}</td>
+                            <td>{{ sortie.dateLimiteinscription|date("d/m/y") }}</td>
+                            <td>{{ sortie.participants.count }} / {{ sortie.nbInscriptionsMax }} </td>
+                            <td>{{ sortie.etat.libelle }}</td>
+                            <td>{{ app.user in sortie.participants ?"x":"" }}</td>
+                            <td>
+                                <a href="{{ path('profil',{'pseudo':sortie.organisateur.pseudo}) }}">{{ sortie.organisateur.pseudo }}</a>
+                            </td>
+                            <td>
+                                <a href="" title="Afficher">Afficher</a>
+                                {% if app.user %}
+                                    {% if app.user in sortie.participants %}
+                                        <a href="{{ path('delete',{ 'id':sortie.id}) }}" title="supprimer">Se
+                                            désister</a>
 
-                            {% if app.user.pseudo==sortie.organisateur.pseudo %}
-                                <a href="{{ path('sortie_annuler',{'id':sortie.id}) }}" title="annuler">Annuler</a>
-                            {% endif %}
-                            {# {% if is_granted('ROLE_ADMIN') %}
+                                    {% elseif sortie.dateLimiteinscription|date > "now"|date %}
+                                        <a href="{{ path('ajout',{ 'id':sortie.id}) }}" title="ajout">S'inscrire</a>
+                                    {% endif %}
+
+                                    {% if  app.user.pseudo  in sortie.organisateur.pseudo %}
+                                        <a href="{{ path('sortie_annuler',{'id':sortie.id}) }}"
+                                           title="annuler">Annuler</a>
+                                    {% endif %}
+                                {% endif %}
+                                {# {% if is_granted('ROLE_ADMIN') %}
 
                                 - <a href=" ">publier</a>
-                            {% endif %}  #}
-                        </td>
-                    </tr>
-                {% endfor %}
+
+                            {% endif %} #}
+
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
             </table>
 
         </section>
-
-            <a href="{{ path('sortie_nouvelle') }}" title="Créer une sortie" >
+        <section>
+            <a href="{{ path('sortie_nouvelle') }}" title="Créer une sortie">
                 <button class="btn btn-lg btn-primary">Créer une sortie</button>
             </a>
+
+        </section>
 
 
     </div>

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SortieRepository;
+use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Participant;
@@ -236,6 +237,16 @@ class Sortie
         $this->campus = $campus;
 
         return $this;
+    }
+
+    public function estNonArchivable(): ?bool
+    {
+        $dateTime = new \DateTime();
+        if ($this->dateHeureDebut <  $dateTime && $dateInterval = date_diff($this->dateHeureDebut, $dateTime)->days > 30){
+            return false;
+        }
+        return true;
+
     }
 
 }

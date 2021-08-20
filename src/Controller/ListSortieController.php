@@ -24,6 +24,7 @@ class ListSortieController extends AbstractController
      */
     public function list(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
+
         $sorties = $sortieRepository->findAll();
         $listCampus = $campusRepository->findAll();
 

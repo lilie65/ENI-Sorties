@@ -70,13 +70,7 @@ class SortieRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function removeParticipant(Participant $participant)
-    {
-        $queryBuilder = $this->createQueryBuilder('s');
-        $queryBuilder->leftJoin('s.participants', 'np');
-        $queryBuilder->delete('np = :part');
-        $queryBuilder->setParameter('part', $participant);
-    }
+
 
 
 
